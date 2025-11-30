@@ -1,0 +1,92 @@
+:root {
+  --yellow: #FFE600;
+  --red: #FF4545;
+  --purple: #8B5CF6;
+  --green: #4ADE80;
+  --black: #101010;
+  --white: #FFFFFA;
+  
+  --border-width: 4px;
+  --shadow-offset: 6px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Tektur', monospace;
+  background: var(--black);
+  color: var(--white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: 'Dela Gothic One', cursive;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+button {
+  font-family: 'Tektur', monospace;
+  font-weight: 700;
+  cursor: pointer;
+  border: var(--border-width) solid var(--black);
+  text-transform: uppercase;
+  transition: transform 0.1s, box-shadow 0.1s;
+  background: var(--yellow);
+  color: var(--black);
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--black);
+}
+
+button:hover {
+  transform: translate(2px, 2px);
+  box-shadow: calc(var(--shadow-offset) - 2px) calc(var(--shadow-offset) - 2px) 0 var(--black);
+}
+
+button:active {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: 0 0 0 var(--black);
+}
+
+button.red {
+  background: var(--red);
+  color: var(--white);
+}
+
+button.purple {
+  background: var(--purple);
+  color: var(--white);
+}
+
+button.green {
+  background: var(--green);
+  color: var(--black);
+}
+
+.card {
+  background: var(--white);
+  color: var(--black);
+  border: var(--border-width) solid var(--black);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 var(--black);
+}
+
+.card:hover {
+  transform: translate(2px, 2px);
+  box-shadow: calc(var(--shadow-offset) - 2px) calc(var(--shadow-offset) - 2px) 0 var(--black);
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
