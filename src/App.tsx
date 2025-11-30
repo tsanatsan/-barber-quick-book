@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import Onboarding from './components/Onboarding';
 import QuickAction from './components/QuickAction';
+import { useLanguage } from './LanguageContext';
 import { SavedPreferences } from './types';
 import './App.css';
 
 const STORAGE_KEY = 'barber-quick-book-prefs';
 
 function App() {
+    const { t } = useLanguage();
     const [preferences, setPreferences] = useState<SavedPreferences | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [editMode, setEditMode] = useState<{ step: number; existingPrefs: SavedPreferences } | null>(null);
@@ -46,7 +48,7 @@ function App() {
     if (isLoading) {
         return (
             <div className="app-loading">
-                <div className="loader">⏳</div>
+                <div className="loader">{t.loading}</div>
             </div>
         );
     }

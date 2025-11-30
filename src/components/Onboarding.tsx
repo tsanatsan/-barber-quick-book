@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { BRANCHES, BARBERS, SERVICES } from '../constants';
 import { SavedPreferences } from '../types';
+import { useLanguage } from '../LanguageContext';
+import { getServicePrice } from '../barberPrices';
+import LanguageToggle from './LanguageToggle';
 import './Onboarding.css';
 
 interface OnboardingProps {
@@ -9,6 +12,7 @@ interface OnboardingProps {
 }
 
 export default function Onboarding({ onComplete, editMode }: OnboardingProps) {
+    const { t } = useLanguage();
     const [step, setStep] = useState(editMode?.step || 1);
     const [branchId, setBranchId] = useState<string>(editMode?.existingPrefs.branchId || '');
     const [barberId, setBarberId] = useState<string>(editMode?.existingPrefs.barberId || '');
@@ -60,7 +64,7 @@ export default function Onboarding({ onComplete, editMode }: OnboardingProps) {
     return (
         <div className="onboarding">
             <div className="onboarding-header">
-                <h1>Быстрая Запись</h1>
+                {step === 1 && <h1>{t.quickBooking}</h1>}
                 <div className="step-indicator">
                     <span className={step === 1 ? 'active' : ''}>1</span>
                     <span className={step === 2 ? 'active' : ''}>2</span>
@@ -70,50 +74,59 @@ export default function Onboarding({ onComplete, editMode }: OnboardingProps) {
 
             {step === 1 && (
                 <div className="selection-grid">
-                    <h2>Выбери филиал</h2>
+                    <h2>{t.selectBranch}</h2>
                     {BRANCHES.map(branch => (
                         <button
                             key={branch.id}
                             onClick={() => handleBranchSelect(branch.id)}
                             className="selection-card"
                         >
-                            <div className="card-title">{branch.name}</div>
+                            <div className="card-title">{t[branch.id as 'central' | 'north']}</div>
                             <div className="card-info">{branch.address}</div>
                         </button>
                     ))}
+                    <div className="nav-buttons-center">
+                        <LanguageToggle />
+                    </div>
                 </div>
             )}
 
             {step === 2 && (
                 <div className="selection-grid">
-                    <button className="back-btn" onClick={() => setStep(1)}>← Назад</button>
-                    <h2>Выбери мастера</h2>
+                    <h2>{t.selectBarber}</h2>
                     {availableBarbers.map(barber => (
                         <button
                             key={barber.id}
                             onClick={() => handleBarberSelect(barber.id)}
                             className="selection-card purple"
                         >
-                            <div className="card-title">{barber.name}</div>
+                            <div className="card-title">{t.barbers[barber.id as keyof typeof t.barbers]}</div>
                         </button>
                     ))}
+                    <div className="nav-buttons">
+                        <button className="back-btn" onClick={() => setStep(1)}>{t.back}</button>
+                        <LanguageToggle />
+                    </div>
                 </div>
             )}
 
             {step === 3 && (
                 <div className="selection-grid">
-                    <button className="back-btn" onClick={() => setStep(2)}>← Назад</button>
-                    <h2>Выбери услугу</h2>
+                    <h2>{t.selectService}</h2>
                     {availableServices.map(service => (
                         <button
                             key={service.id}
                             onClick={() => handleServiceSelect(service.id)}
                             className="selection-card red"
                         >
-                            <div className="card-title">{service.name}</div>
-                            <div className="card-info">{service.price} лв • {service.duration} мин</div>
+                            <div className="card-title">{t[service.id as keyof typeof t]}</div>
+                            <div className="card-info">{getServicePrice(barberId, service.id)} {t.price} • {service.duration} {t.minutes}</div>
                         </button>
                     ))}
+                    <div className="nav-buttons">
+                        <button className="back-btn" onClick={() => setStep(2)}>{t.back}</button>
+                        <LanguageToggle />
+                    </div>
                 </div>
             )}
         </div>

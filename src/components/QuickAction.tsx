@@ -1,6 +1,8 @@
 import { BARBERS, SERVICES, BRANCHES } from '../constants';
 import { SavedPreferences } from '../types';
 import { getBookingLink } from '../bookingLinks';
+import { useLanguage } from '../LanguageContext';
+import LanguageToggle from './LanguageToggle';
 import './QuickAction.css';
 
 interface QuickActionProps {
@@ -10,6 +12,7 @@ interface QuickActionProps {
 }
 
 export default function QuickAction({ preferences, onReset, onEdit }: QuickActionProps) {
+    const { t } = useLanguage();
     const barber = BARBERS.find(b => b.id === preferences.barberId);
     const service = SERVICES.find(s => s.id === preferences.serviceId);
     const branch = BRANCHES.find(b => b.id === preferences.branchId);
@@ -23,7 +26,9 @@ export default function QuickAction({ preferences, onReset, onEdit }: QuickActio
             window.open(bookingUrl, '_blank');
         } else {
             // Если ссылка не найдена, показываем предупреждение
-            alert(`Ссылка для записи не настроена для мастера ${barber?.name} и услуги ${service?.name}. Пожалуйста, обратитесь к администратору.`);
+            const barberName = barber?.id ? t.barbers[barber.id as keyof typeof t.barbers] : '';
+            const serviceName = service?.id ? t[service.id as keyof typeof t] : '';
+            alert(`Booking link not configured for ${barberName} and ${serviceName}. Please contact administrator.`);
             console.error(`Booking link not found for barber: ${preferences.barberId}, service: ${preferences.serviceId}`);
         }
     };
@@ -31,42 +36,41 @@ export default function QuickAction({ preferences, onReset, onEdit }: QuickActio
     return (
         <div className="quick-action">
             <div className="quick-header">
-                <h1>Ready To Book!</h1>
+                <h1>{t.yourPreferences}</h1>
             </div>
 
             <div className="booking-card">
                 <div className="booking-info">
                     <div className="info-row">
-                        <span className="label">Филиал:</span>
-                        <span className="value">{branch?.name}</span>
+                        <span className="label">{t.branch}:</span>
+                        <span className="value">{t[branch?.id as 'central' | 'north']}</span>
                     </div>
                     <div className="info-row">
-                        <span className="label">Мастер:</span>
-                        <span className="value">{barber?.name}</span>
+                        <span className="label">{t.barber}:</span>
+                        <span className="value">{barber?.id ? t.barbers[barber.id as keyof typeof t.barbers] : ''}</span>
                     </div>
                     <div className="info-row">
-                        <span className="label">Услуга:</span>
-                        <span className="value clickable" onClick={() => onEdit(3)} title="Кликни чтобы изменить услугу">
-                            {service?.name}
+                        <span className="label">{t.service}:</span>
+                        <span className="value clickable" onClick={() => onEdit(3)} title={`${t.edit} ${t.service.toLowerCase()}`}>
+                            {service?.id ? t[service.id as keyof typeof t] : ''}
                         </span>
                     </div>
                     <div className="info-row">
-                        <span className="label">Цена:</span>
-                        <span className="value">{service?.price} лв</span>
+                        <span className="label">{t.duration}:</span>
+                        <span className="value">{service?.duration} {t.minutes}</span>
                     </div>
                 </div>
 
                 <button className="book-btn red" onClick={handleBookNow}>
-                    📅 Записаться
+                    📅 {t.book}
                 </button>
 
-                <button className="settings-btn" onClick={onReset}>
-                    ⚙️ Сбросить всё
-                </button>
-            </div>
-
-            <div className="quick-tip">
-                💡 Кликни на Услугу чтобы быстро изменить её
+                <div className="action-buttons">
+                    <button className="settings-btn" onClick={onReset}>
+                        ⚙️ {t.reset}
+                    </button>
+                    <LanguageToggle />
+                </div>
             </div>
         </div>
     );
