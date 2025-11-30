@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/languagecontext.tsx","./src/barberprices.ts","./src/bookinglinks.ts","./src/constants.ts","./src/main.tsx","./src/translations.ts","./src/types.ts","./src/components/languagetoggle.tsx","./src/components/onboarding.tsx","./src/components/quickaction.tsx"],"errors":true,"version":"5.9.3"}
