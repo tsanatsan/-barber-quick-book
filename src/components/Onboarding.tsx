@@ -100,7 +100,7 @@ export default function Onboarding({ onComplete, editMode }: OnboardingProps) {
                             onClick={() => handleBarberSelect(barber.id)}
                             className="selection-card purple"
                         >
-                            <div className="card-title">{t.barbers[barber.id as keyof typeof t.barbers]}</div>
+                            <div className="card-title">{barber.name}</div>
                         </button>
                     ))}
                     <div className="nav-buttons">
@@ -113,22 +113,10 @@ export default function Onboarding({ onComplete, editMode }: OnboardingProps) {
             {step === 3 && (
                 <div className="selection-grid">
                     <h2>{t.selectService}</h2>
-                    {availableServices.map(service => (
-                        <button
-                            key={service.id}
-                            onClick={() => handleServiceSelect(service.id)}
-                            className="selection-card red"
-                        >
-                            <div className="card-title">{t[service.id as keyof typeof t]}</div>
-                            <div className="card-info">{getServicePrice(barberId, service.id)} {t.price} • {service.duration} {t.minutes}</div>
-                        </button>
-                    ))}
-                    <div className="nav-buttons">
-                        <button className="back-btn" onClick={() => setStep(2)}>{t.back}</button>
-                        <LanguageToggle />
-                    </div>
                 </div>
-            )}
-        </div>
+                </div>
+    )
+}
+        </div >
     );
 }
