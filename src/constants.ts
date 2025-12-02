@@ -53,7 +53,7 @@ export const SERVICES: Service[] = [
     { id: 'beard', name: 'Борода', price: 35, duration: 45 },
     { id: 'complex', name: 'Комплекс', price: 70, duration: 90 },
     { id: 'buzzcomplex', name: 'Машинка + Борода', price: 60, duration: 75 },
-    { id: 'kids', name: 'Детская стрижка', price: 35, duration: 30 }
+    { id: 'kids', name: 'Детская стрижка', price: 40, duration: 60 }
 ];
 
 export const COLORS = {
