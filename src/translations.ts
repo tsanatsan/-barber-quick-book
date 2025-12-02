@@ -90,14 +90,14 @@ export const translations: Record<Language, Translations> = {
         barbers: {
             vsevolod: 'Всеволод',
             shenol: 'Шенол',
-            ibo: 'Ибо',
+            ibo: 'Ибрагим',
             anna: 'Ани',
-            philip: 'Филлип',
+            philip: 'Филип',
             joro: 'Георги',
             sergey: 'Сергей',
             andrey: 'Андрей',
             alina: 'Алина',
-            soner: 'Сонер',
+            soner: 'Сони',
         }
     },
     en: {
@@ -139,14 +139,14 @@ export const translations: Record<Language, Translations> = {
         barbers: {
             vsevolod: 'Vsevolod',
             shenol: 'Shenol',
-            ibo: 'Ibo',
+            ibo: 'Ibrahim',
             anna: 'Ani',
-            philip: 'Phillip',
+            philip: 'Filip',
             joro: 'Georgi',
             sergey: 'Sergey',
             andrey: 'Andrey',
             alina: 'Alina',
-            soner: 'Soner',
+            soner: 'Soni',
         }
     }
 };

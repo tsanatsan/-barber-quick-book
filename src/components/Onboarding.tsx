@@ -94,7 +94,7 @@ export default function Onboarding({ onComplete, editMode }: OnboardingProps) {
                             onClick={() => handleBarberSelect(barber.id)}
                             className="selection-card purple"
                         >
-                            <div className="card-title">{barber.name}</div>
+                            <div className="card-title">{t.barbers[barber.id as keyof typeof t.barbers]}</div>
                         </button>
                     ))}
                     <div className="nav-buttons">
@@ -113,7 +113,7 @@ export default function Onboarding({ onComplete, editMode }: OnboardingProps) {
                             onClick={() => handleServiceSelect(service.id)}
                             className="selection-card red"
                         >
-                            <div className="card-title">{service.name}</div>
+                            <div className="card-title">{t[service.id as 'haircut' | 'buzzcut' | 'beard' | 'complex' | 'buzzcomplex' | 'kids']}</div>
                             <div className="card-info">{getServicePrice(barberId, service.id)} {t.price} • {service.duration} {t.minutes}</div>
                         </button>
                     ))}

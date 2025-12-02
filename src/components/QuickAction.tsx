@@ -23,8 +23,8 @@ export default function QuickAction({ preferences, onReset, onEdit }: QuickActio
         if (bookingUrl) {
             window.open(bookingUrl, '_blank');
         } else {
-            const barberName = barber?.name || '';
-            const serviceName = service?.name || '';
+            const barberName = barber ? t.barbers[barber.id as keyof typeof t.barbers] : '';
+            const serviceName = service ? t[service.id as 'haircut' | 'buzzcut' | 'beard' | 'complex' | 'buzzcomplex' | 'kids'] as string : '';
             alert(`Booking link not configured for ${barberName} and ${serviceName}. Please contact administrator.`);
             console.error(`Booking link not found for barber: ${preferences.barberId}, service: ${preferences.serviceId}`);
         }
@@ -44,12 +44,12 @@ export default function QuickAction({ preferences, onReset, onEdit }: QuickActio
                     </div>
                     <div className="info-row">
                         <span className="label">{t.barber}:</span>
-                        <span className="value">{barber?.name || ''}</span>
+                        <span className="value">{barber ? t.barbers[barber.id as keyof typeof t.barbers] : ''}</span>
                     </div>
                     <div className="info-row">
                         <span className="label">{t.service}:</span>
                         <span className="value clickable" onClick={() => onEdit(3)} title={`${t.edit} ${t.service.toLowerCase()}`}>
-                            {service?.name || ''}
+                            {service ? t[service.id as 'haircut' | 'buzzcut' | 'beard' | 'complex' | 'buzzcomplex' | 'kids'] as string : ''}
                         </span>
                     </div>
                     <div className="info-row">
