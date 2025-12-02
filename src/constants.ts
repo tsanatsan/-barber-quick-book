@@ -21,10 +21,10 @@ export const BARBERS: Barber[] = [
     // Central
     { id: 'vsevolod', name: 'Всеволод', branchId: 'central' },
     { id: 'shenol', name: 'Шенол', branchId: 'central' },
-    { id: 'ibo', name: 'Ибо', branchId: 'central' },
-    { id: 'anna', name: 'Анна', branchId: 'central' },
-    { id: 'philip', name: 'Филипп', branchId: 'central' },
-    { id: 'joro', name: 'Жоро', branchId: 'central' },
+    { id: 'ibo', name: 'Ибрагим', branchId: 'central' },
+    { id: 'anna', name: 'Ани', branchId: 'central' },
+    { id: 'philip', name: 'Филип', branchId: 'central' },
+    { id: 'joro', name: 'Георги', branchId: 'central' },
     // North
     {
         id: 'sergey',
@@ -41,7 +41,7 @@ export const BARBERS: Barber[] = [
     },
     {
         id: 'soner',
-        name: 'Сонер',
+        name: 'Сони',
         branchId: 'north',
         bookingUrl: 'https://alteg.io/soner' // placeholder
     }
